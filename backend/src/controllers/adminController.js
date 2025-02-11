@@ -15,7 +15,6 @@ const uploadToCloudinary = async (file) => {
     }
 };
 
-
 //Create song controller
 export const createSong = async (req, res, next) => {
     try {
