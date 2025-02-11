@@ -1,7 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import path from 'path';
-import fileupload from 'express-fileupload';
+import fileUpload from 'express-fileupload';
 import { clerkMiddleware } from '@clerk/express'
 
 //Files imported
@@ -17,12 +18,15 @@ import adminRoutes from './routes/adminRoutes.js';
 import songsRoutes from './routes/songsRoutes.js';
 import albumsRoutes from './routes/albumsRoutes.js';
 import statsRoutes from './routes/statsRoutes.js';
-import fileUpload from 'express-fileupload';
 
 //Initialize express app
 const app = express();
 
 //Middlewares
+app.use(cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true
+})); //Enable CORS
 app.use(express.json()); //Parse JSON bodies (as sent by API clients)
 app.use(clerkMiddleware()); // Pass no parameters => adds auth to req object
 app.use(fileUpload({
