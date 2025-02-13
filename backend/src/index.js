@@ -13,8 +13,8 @@ const __dirname = path.resolve();
 
 //Routes
 import authRoutes from './routes/authRoutes.js';
-import userRoutes from './routes/userRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import songsRoutes from './routes/songsRoutes.js';
 import albumsRoutes from './routes/albumsRoutes.js';
 import statsRoutes from './routes/statsRoutes.js';
