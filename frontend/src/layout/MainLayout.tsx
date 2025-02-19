@@ -5,6 +5,8 @@ import {
   ResizablePanelGroup,
 } from "../components/ui/resizable";
 import LeftSidebar from "./components/LeftSidebar";
+import FriendsActivity from "./components/FriendsActivity";
+import AudioPlayer from "./components/AudioPlayer";
 
 
 const MainLayout = () => {
@@ -13,6 +15,7 @@ const MainLayout = () => {
   return (
     <div className="h-screen bg-black text-white flex flex-col">
       <ResizablePanelGroup direction="horizontal" className="flex-1 flex h-full overflow-hidden p-2">
+        <AudioPlayer />
         {/* Left Sidebar */}
         <ResizablePanel defaultSize={20} minSize={isMobile ? 0 : 10} maxSize={30} >
           <LeftSidebar />
@@ -29,7 +32,7 @@ const MainLayout = () => {
 
         {/* Right Sidebar */}
         <ResizablePanel defaultSize={20} minSize={0} maxSize={25} collapsedSize={0}>
-          Friends Activity
+          <FriendsActivity />
         </ResizablePanel>
       </ResizablePanelGroup>
     </div>
