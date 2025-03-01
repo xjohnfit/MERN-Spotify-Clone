@@ -15,7 +15,7 @@ export const getFeaturedSongs = async (req, res, next) => {
         //Get 6 random songs from the database using aggregation pipeline
         const songs = await Song.aggregate([
             {$sample: {size: 6}},
-            {$project: {_id: 1, title: 1, artist: 1, imageUrl: 1, audioUrl: 1}}
+            {$project: {_id: 1, title: 1, artist: 1, imageUrl: 1, songUrl: 1}}
         ]);
 
         res.status(200).json(songs);
@@ -29,7 +29,7 @@ export const madeForYou = async (req, res, next) => {
         //Get 4 random songs from the database using aggregation pipeline
         const songs = await Song.aggregate([
             {$sample: {size: 4}},
-            {$project: {_id: 1, title: 1, artist: 1, imageUrl: 1, audioUrl: 1}}
+            {$project: {_id: 1, title: 1, artist: 1, imageUrl: 1, songUrl: 1}}
         ]);
 
         res.status(200).json(songs);
@@ -43,7 +43,7 @@ export const trending = async (req, res, next) => {
         //Get 4 random songs from the database using aggregation pipeline
         const songs = await Song.aggregate([
             {$sample: {size: 4}},
-            {$project: {_id: 1, title: 1, artist: 1, imageUrl: 1, audioUrl: 1}}
+            {$project: {_id: 1, title: 1, artist: 1, imageUrl: 1, songUrl: 1}}
         ]);
 
         res.status(200).json(songs);
