@@ -1,7 +1,3 @@
-Certainly! Here's a comprehensive `README.md` tailored for your MERN Spotify Clone project:
-
----
-
 # MERN Spotify Clone
 
 A full-stack music streaming application built using the MERN (MongoDB, Express.js, React.js, Node.js) stack. This project replicates the core features of Spotify, allowing users to play music, create playlists, and manage their library.
@@ -24,7 +20,7 @@ A full-stack music streaming application built using the MERN (MongoDB, Express.
 * **Database**: MongoDB
 * **Authentication**: JWT (JSON Web Tokens)
 * **File Storage**: Cloudinary
-* **State Management**: Context API
+* **State Management**: Zustand
 * **Routing**: React Router
 * **Others**: Axios, React Toastify
 
@@ -35,18 +31,21 @@ A full-stack music streaming application built using the MERN (MongoDB, Express.
 ```
 MERN-Spotify-Clone/
 ├── backend/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
+│   ├── src/
+|   |   |──controllers/
+|   |   |──middlewares/
+│   |   ├── models/
+│   |   ├── routes/
+|   |   ├── seeds/
+│   ├── tmp/
 │   ├── .env
-│   ├── server.js
 │   └── package.json
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
 │   │   ├── pages/
-│   │   ├── App.js
-│   │   └── index.js
+│   │   ├── App.tsx
+│   │   └── index.css
 │   ├── public/
 │   └── package.json
 └── README.md
@@ -97,16 +96,16 @@ MERN-Spotify-Clone/
    * In the `backend` directory:
 
      ```bash
-     npm start
+     npm run backend
      ```
 
    * In the `frontend` directory:
 
      ```bash
-     npm start
+     npm run dev
      ```
 
-   The application should now be running on `http://localhost:3000`.
+   The application should now be running on `http://localhost:5173`.
 
 ---
 
@@ -115,7 +114,8 @@ MERN-Spotify-Clone/
 * **Home Page**: Browse and play music.
 * **Library**: Manage your playlists and saved songs.
 * **Search**: Find songs, albums, or artists.
-* **Admin Panel**: (If implemented) Manage content and user data.
+* **Admin Panel**: Manage content and user data.
+* **Messages**: You can message any user that's online in real time.
 
 ---
 
@@ -129,7 +129,3 @@ MERN-Spotify-Clone/
 ## 📄 License
 
 This project is licensed under the MIT License.
-
----
-
-Feel free to modify this `README.md` to better fit any additional features or changes specific to your project.
