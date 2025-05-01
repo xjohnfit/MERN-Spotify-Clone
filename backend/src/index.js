@@ -7,9 +7,17 @@ import { clerkMiddleware } from '@clerk/express'
 
 //Files imported
 import { connectDB } from './db.js';
+import { initializeSocketIO } from './socket.io.js';
 
 dotenv.config();
 const __dirname = path.resolve();
+
+//Initialize express server
+const app = express();
+
+//initialize socket.io
+const httpServer = createServer(app);
+initializeSocketIO(httpServer);
 
 //Routes
 import authRoutes from './routes/authRoutes.js';
@@ -18,9 +26,8 @@ import userRoutes from './routes/userRoutes.js';
 import songsRoutes from './routes/songsRoutes.js';
 import albumsRoutes from './routes/albumsRoutes.js';
 import statsRoutes from './routes/statsRoutes.js';
+import { createServer } from 'http';
 
-//Initialize express app
-const app = express();
 
 //Middlewares
 app.use(cors({
@@ -56,9 +63,7 @@ if(process.env.NODE_ENV === 'production') {
 }
 
 const PORT = process.env.PORT || 5003;
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
     console.log('Server is running on port ' + PORT);
     connectDB();
 });
-
-//TODO: socket.io
