@@ -9,66 +9,65 @@ export const initializeSocketIO = (httpServer) => {
         },
     });
 
-    const userSockets = new Map(); // Store user sockets by userId { userId: socketId }
-    const userActivities = new Map(); // Store user activities by userId { userId: activity }
+    const userSockets = new Map(); // { userId: socketId}
+	const userActivities = new Map(); // {userId: activity}
 
-    io.on('connection', (socket) => {
-        socket.on('userConnected', (userId) => {
-            // Store the socket ID for the user
-            userSockets.set(userId, socket.id);
-            userActivities.set(userId, 'idle'); // Initialize user activity as idle
+	io.on("connection", (socket) => {
+		socket.on("user_connected", (userId) => {
+			userSockets.set(userId, socket.id);
+			userActivities.set(userId, "Idle");
 
-            io.emit('userConnected', userId); // Notify all clients that a new user connected
+			// broadcast to all connected sockets that this user just logged in
+			io.emit("user_connected", userId);
 
-            socket.emit('onlineUsers', Array.from(userSockets.keys())); // Send the list of online users to the newly connected user
+			socket.emit("users_online", Array.from(userSockets.keys()));
 
-            io.emit('userActivity', Array.from(userActivities.entries())); // Broadcast the user activities to all clients
-        });
+			io.emit("activities", Array.from(userActivities.entries()));
+		});
 
-        socket.on('updateActivity', (userId, activity) => {
-            console.log('Activity updated:', userId, activity);
-            userActivities.set(userId, activity); // Update the user's activity
-            io.emit('userActivity', Array.from(userActivities.entries())); // Broadcast the user activities to all clients
-        });
+		socket.on("update_activity", ({ userId, activity }) => {
+			console.log("activity updated", userId, activity);
+			userActivities.set(userId, activity);
+			io.emit("activity_updated", { userId, activity });
+		});
 
-        socket.on('sendMessage', async (message) => {
-            try {
-                const {senderId, receiverId, content } = message; // Destructure the message object to extract properties
-                const newMessage = await Message.create({
-                    senderId,
-                    receiverId,
-                    content,
-                }); // Save the message to the database
+		socket.on("send_message", async (data) => {
+			try {
+				const { senderId, receiverId, content } = data;
 
-                const receiverSocketId = userSockets.get(receiverId); // Get the socket ID of the receiver
+				const message = await Message.create({
+					senderId,
+					receiverId,
+					content,
+				});
 
-                if(receiverSocketId) {
-                    io.to(receiverSocketId).emit('messageReceived', newMessage); // Emit the message to the receiver
-                } // If the receiver is online, emit the message to them
+				// send to receiver in realtime, if they're online
+				const receiverSocketId = userSockets.get(receiverId);
+				if (receiverSocketId) {
+					io.to(receiverSocketId).emit("receive_message", message);
+				}
 
-                socket.emit('messageReceived', newMessage); // Emit the message to all clients
-            } catch (error) {
-                console.error('Error saving message:', error);
-                socket.emit('error', 'Error saving message'); // Emit an error event to the client
-            }
-        });
+				socket.emit("message_sent", message);
+			} catch (error) {
+				console.error("Message error:", error);
+				socket.emit("message_error", error.message);
+			}
+		});
 
-        socket.on('disconnect', () => {
-
-            let disconnectedUserId = null; // Initialize a variable to store the disconnected user ID
-
-            // Remove the user from the online users list
-            for (const [userId, socketId] of userSockets.entries()) {
-                if (socketId === socket.id) {
-                    disconnectedUserId = userId; // Store the disconnected user ID
-                    userSockets.delete(userId); // Remove the user from the online users list
-                    userActivities.delete(userId); // Remove the user's activity
-                    break;
-                }
-            }
-            if (disconnectedUserId) {
-                io.emit('userDisconnected', disconnectedUserId); 
-            }
-        });
-    });
+		socket.on("disconnect", () => {
+			let disconnectedUserId;
+			for (const [userId, socketId] of userSockets.entries()) {
+				// find disconnected user
+				if (socketId === socket.id) {
+					disconnectedUserId = userId;
+					userSockets.delete(userId);
+					userActivities.delete(userId);
+					break;
+				}
+			}
+			if (disconnectedUserId) {
+				io.emit("user_disconnected", disconnectedUserId);
+			}
+		});
+	});
 };

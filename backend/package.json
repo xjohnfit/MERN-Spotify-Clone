@@ -4,9 +4,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "backend": "nodemon src/index.js",
-    "seed:songs":"node src/seeds/songs.js",
-    "seed:albums":"node src/seeds/albums.js"
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "seed:songs": "node src/seeds/songs.js",
+    "seed:albums": "node src/seeds/albums.js"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
     "express": "^4.21.2",
     "express-fileupload": "^1.5.1",
     "mongoose": "^8.10.0",
+    "node-cron": "^3.0.3",
     "socket.io": "^4.8.1"
   },
   "devDependencies": {
