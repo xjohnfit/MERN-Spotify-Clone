@@ -1,6 +1,6 @@
 # MERN Spotify Clone
 
-A full-stack music streaming application built using the MERN (MongoDB, Express.js, React.js, Node.js) stack. This project replicates the core features of Spotify, allowing users to play music, create playlists, and manage their library.
+A feature-rich, full-stack music streaming platform built with the MERN stack (MongoDB, Express.js, React.js, Node.js), designed to deliver a dynamic user experience similar to Spotify. The application enables users to stream music, create and customize playlists, and manage their personal libraries. What sets this project apart is its real-time communication feature, allowing users logged in at the same time to chat, display the song being listened to at current time, fostering a social and interactive environment for music lovers.
 
 ---
 
@@ -18,7 +18,7 @@ A full-stack music streaming application built using the MERN (MongoDB, Express.
 * **Frontend**: React.js, Tailwind CSS
 * **Backend**: Node.js, Express.js
 * **Database**: MongoDB
-* **Authentication**: JWT (JSON Web Tokens)
+* **Authentication**: Clerk
 * **File Storage**: Cloudinary
 * **State Management**: Zustand
 * **Routing**: React Router
