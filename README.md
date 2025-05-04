@@ -18,7 +18,7 @@ A feature-rich, full-stack music streaming platform built with the MERN stack (M
 * **Frontend**: React.js, Tailwind CSS
 * **Backend**: Node.js, Express.js
 * **Database**: MongoDB
-* **Authentication**: JWT (JSON Web Tokens)
+* **Authentication**: Clerk
 * **File Storage**: Cloudinary
 * **State Management**: Zustand
 * **Routing**: React Router
