@@ -6,7 +6,7 @@ pipeline {
     }
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
-        APP_NAME = 'MERN-Spotify-Clone'
+        APP_NAME = 'mern-spotify-clone'
         RELEASE = '1.0.0'
         DOCKER_USER = 'xjohnfit'
         DOCKER_PASS = 'dockerhub'
