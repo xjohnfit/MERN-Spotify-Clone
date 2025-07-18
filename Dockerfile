@@ -8,7 +8,7 @@ COPY frontend/ ./
  # Set public environment variables for Vite build
  ENV VITE_CLERK_PUBLISHABLE_KEY=pk_test_dml0YWwtbWFnZ290LTYxLmNsZXJrLmFjY291bnRzLmRldiQ
  ENV VITE_API_URL=http://localhost:5003/api
- ENV VITE_BACKEND_URL=http://localhost:5003
+ ENV VITE_BACKEND_URL=http://localhost:5002
  RUN npm run build
 
 # --- Backend Build Stage ---
