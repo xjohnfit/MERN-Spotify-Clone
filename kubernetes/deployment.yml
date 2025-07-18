@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mern-spotify-clone-deployment
+  name: mern-spotify-clone
 spec:
   replicas: 1
   selector:
