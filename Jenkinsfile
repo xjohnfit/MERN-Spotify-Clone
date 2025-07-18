@@ -21,7 +21,7 @@ pipeline {
         }
         stage('2. Checkout from Git') {
             steps {
-                git branch: 'main', url: 'https://github.com/xjohnfit/MERN-Spotify-Clone.git',
+                git branch: 'main', url: 'https://github.com/xjohnfit/mern-spotify-clone.git',
                 credentialsId: 'github'
             }
         }
